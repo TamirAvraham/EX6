@@ -5,6 +5,8 @@
 #include "Parallelogram.h"
 #include "ShapeException.h"
 #include "InputError.h"
+#include "Pentagon.h"
+#include "Hexagon.h"
 #include <string>
 #include <iostream>
 #define print(a) std::cout<<a<<"\n";
@@ -24,19 +26,22 @@ int main()
 	Quadrilateral quad(nam, col, width, height);
 	rectangle rec(nam, col, width, height);
 	Parallelogram para(nam, col, width, height, ang, ang2);
+	Hexagon hex(nam, col, rad);
+	Pentagon pent(nam, col, rad);
 
 	Shape *ptrcirc = &circ;
 	Shape *ptrquad = &quad;
 	Shape *ptrrec = &rec;
 	Shape *ptrpara = &para;
-
+	Shape* ptrpent = &pent;
+	Shape* ptrhex = &hex;
 
 	
 	std::cout << "Enter information for your objects" << std::endl;
-	const char circle = 'c', quadrilateral = 'q', rectangle = 'r', parallelogram = 'p'; char shapetype; std::string countStr;
+	const char circle = 'c', quadrilateral = 'q', rectangle = 'r', parallelogram = 'p',hexagon='h',penatgon='n'; char shapetype; std::string countStr;
 	char x = 'y';
 	while (x != 'x') {
-		std::cout << "which shape would you like to work with?.. \nc=circle, q = quadrilateral, r = rectangle, p = parallelogram" << std::endl;
+		std::cout << "which shape would you like to work with?.. \nc=circle, q = quadrilateral, r = rectangle, p = parallelogram,h=hexagram,n=pentagram" << std::endl;
 		std::cin >> countStr;
 		shapetype = countStr[0];
 		if (countStr.length()>1)
@@ -48,6 +53,22 @@ int main()
 		{
 
 			switch (shapetype) {
+			case 'n':
+				std::cout << "enter color, name,  rib for pentagram" << std::endl;
+				std::cin >> col >> nam >> rad;
+				pent.setColor(col);
+				pent.setName(nam);
+				pent.setRib(rad);
+				ptrpent->draw();
+				break;
+			case 'h':
+				std::cout << "enter color, name,  rib for hexagon" << std::endl;
+				std::cin >> col >> nam >> rad;
+				hex.setColor(col);
+				hex.setName(nam);
+				hex.setRib(rad);
+				ptrhex->draw();
+				break;
 			case 'c':
 				std::cout << "enter color, name,  rad for circle" << std::endl;
 				std::cin >> col >> nam >> rad;
